@@ -8,6 +8,17 @@
     <artifactId>spark-test-utils</artifactId>
     <version>2.3</version>
 
+    <scm>
+        <connection>scm:git:git@github.com:ryber/spark-test-utils.git</connection>
+        <developerConnection>scm:git:git@github.com:ryber/spark-test-utils.git</developerConnection>
+        <url>scm:git:git@github.com:ryber/spark-test-utils.git</url>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>com.sparkjava</groupId>
