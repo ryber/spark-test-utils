@@ -19,6 +19,10 @@ public class MockRequest implements HttpServletRequest {
     private Locale locale = Locale.ENGLISH;
     private FormVars form = new FormVars();
 
+    public MockRequest(HttpMethod method, String path) {
+        this(method, path, null, null);
+    }
+
     public MockRequest(HttpMethod method, String path, FormVars form) {
         this(method, path, form, null);
     }
