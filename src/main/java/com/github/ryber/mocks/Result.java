@@ -31,4 +31,8 @@ public class Result {
     public String getRedirect() {
         return redirect;
     }
+
+    public Exception getThrownException() {
+        return thrownException;
+    }
 }
