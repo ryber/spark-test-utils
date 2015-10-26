@@ -58,12 +58,12 @@ public class MockResponse implements HttpServletResponse {
 
     @Override
     public void sendError(int sc, String msg) throws IOException {
-
+        status = sc;
     }
 
     @Override
     public void sendError(int sc) throws IOException {
-
+        status = sc;
     }
 
     @Override
