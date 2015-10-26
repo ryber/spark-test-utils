@@ -1,11 +1,15 @@
 package com.github.ryber.mocks;
 
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
@@ -15,6 +19,7 @@ public class MockResponse implements HttpServletResponse {
 
     private FakeServletOutputStream fakeStream = new FakeServletOutputStream();
     private String redirectLocation;
+    private Multimap<String,String> headers = HashMultimap.create();
 
 
     public String getOutputString()  {
@@ -68,22 +73,22 @@ public class MockResponse implements HttpServletResponse {
 
     @Override
     public void setDateHeader(String name, long date) {
-
+        headers.replaceValues(name, Arrays.asList(String.valueOf(date)));
     }
 
     @Override
     public void addDateHeader(String name, long date) {
-
+        headers.put(name, String.valueOf(date));
     }
 
     @Override
     public void setHeader(String name, String value) {
-
+        headers.replaceValues(name, Arrays.asList(value));
     }
 
     @Override
     public void addHeader(String name, String value) {
-
+        headers.put(name, value);
     }
 
     @Override
@@ -191,17 +196,17 @@ public class MockResponse implements HttpServletResponse {
 
     @Override
     public String getHeader(String s) {
-        return null;
+        return headers.get(s).stream().findFirst().orElse(null);
     }
 
     @Override
     public Collection<String> getHeaders(String s) {
-        return null;
+        return headers.get(s);
     }
 
     @Override
     public Collection<String> getHeaderNames() {
-        return null;
+        return headers.keySet();
     }
 
     public String getRedirectLocation(){

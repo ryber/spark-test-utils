@@ -1,5 +1,7 @@
 package com.github.ryber.mocks;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import spark.route.HttpMethod;
 
 import javax.servlet.*;
@@ -15,7 +17,7 @@ public class MockRequest implements HttpServletRequest {
     private final Cookie[] cookies;
     private final HttpMethod method;
     private final String path;
-    private final Map<String,String> headers = new HashMap<>();
+    private final Multimap<String,String> headers = HashMultimap.create();
 
     private Locale locale = Locale.ENGLISH;
     private FormVars form = new FormVars();
@@ -247,12 +249,12 @@ public class MockRequest implements HttpServletRequest {
 
     @Override
     public String getHeader(String name) {
-        return headers.get(name);
+        return headers.get(name).stream().findFirst().orElse(null);
     }
 
     @Override
     public Enumeration getHeaders(String name) {
-        return  Collections.enumeration(Collections.singletonList(getHeader(name)));
+        return  Collections.enumeration(headers.get(name));
     }
 
     @Override
