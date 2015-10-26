@@ -15,6 +15,7 @@ public class MockRequest implements HttpServletRequest {
     private final Cookie[] cookies;
     private final HttpMethod method;
     private final String path;
+    private final Map<String,String> headers = new HashMap<>();
 
     private Locale locale = Locale.ENGLISH;
     private FormVars form = new FormVars();
@@ -32,6 +33,10 @@ public class MockRequest implements HttpServletRequest {
         this.method = method;
         this.path = path;
         setForm(form);
+    }
+
+    public void addHeader(String name, String value){
+        headers.put(name, value);
     }
 
     private void setForm(FormVars input) {
@@ -242,17 +247,17 @@ public class MockRequest implements HttpServletRequest {
 
     @Override
     public String getHeader(String name) {
-        return null;
+        return headers.get(name);
     }
 
     @Override
     public Enumeration getHeaders(String name) {
-        return null;
+        return  Collections.enumeration(Collections.singletonList(getHeader(name)));
     }
 
     @Override
     public Enumeration getHeaderNames() {
-        return null;
+        return Collections.enumeration(headers.keySet());
     }
 
     @Override
