@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class MockResponse implements HttpServletResponse {
 
-    private int status;
+    private int status = 200;
 
     private FakeServletOutputStream fakeStream = new FakeServletOutputStream();
     private String redirectLocation;
@@ -68,6 +68,7 @@ public class MockResponse implements HttpServletResponse {
 
     @Override
     public void sendRedirect(String location) throws IOException {
+        status = 302;
         redirectLocation = location;
     }
 
