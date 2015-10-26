@@ -21,7 +21,6 @@ public class FakeAppServer {
         matcherFilter.init(null);
 
         MockRequest request = new MockRequest(method, path, form, cookies);
-        request.hea
 
 
         MockResponse response = new MockResponse();
