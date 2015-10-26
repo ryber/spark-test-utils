@@ -13,7 +13,7 @@ import java.security.Principal;
 import java.util.*;
 
 
-public class MockRequest implements HttpServletRequest {
+public class MockHttpRequest implements HttpServletRequest {
     private final Cookie[] cookies;
     private final HttpMethod method;
     private final String path;
@@ -22,15 +22,15 @@ public class MockRequest implements HttpServletRequest {
     private Locale locale = Locale.ENGLISH;
     private FormVars form = new FormVars();
 
-    public MockRequest(HttpMethod method, String path) {
+    public MockHttpRequest(HttpMethod method, String path) {
         this(method, path, null, null);
     }
 
-    public MockRequest(HttpMethod method, String path, FormVars form) {
+    public MockHttpRequest(HttpMethod method, String path, FormVars form) {
         this(method, path, form, null);
     }
 
-    public MockRequest(HttpMethod method, String path, FormVars form, Cookie[] cookies) {
+    public MockHttpRequest(HttpMethod method, String path, FormVars form, Cookie[] cookies) {
         this.cookies = cookies != null ? cookies : new Cookie[]{};
         this.method = method;
         this.path = path;

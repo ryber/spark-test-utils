@@ -20,10 +20,10 @@ public class FakeAppServer {
         MatcherFilter matcherFilter = new MatcherFilter(RouteMatcherFactory.get(), false, false);
         matcherFilter.init(null);
 
-        MockRequest request = new MockRequest(method, path, form, cookies);
+        MockHttpRequest request = new MockHttpRequest(method, path, form, cookies);
 
 
-        MockResponse response = new MockResponse();
+        MockHttpResponse response = new MockHttpResponse();
         try {
             matcherFilter.doFilter(request, response, null);
         } catch (Exception e) {

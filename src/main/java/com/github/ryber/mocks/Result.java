@@ -13,7 +13,7 @@ public class Result {
         thrownException = e;
     }
 
-    public Result(MockResponse response){
+    public Result(MockHttpResponse response){
         status = response.getStatus();
         content = response.getOutputString();
         redirect = response.getRedirectLocation();

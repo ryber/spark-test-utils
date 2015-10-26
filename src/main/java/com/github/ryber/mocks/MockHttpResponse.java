@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Locale;
 
-public class MockResponse implements HttpServletResponse {
+public class MockHttpResponse implements HttpServletResponse {
 
     private int status = 200;
 
