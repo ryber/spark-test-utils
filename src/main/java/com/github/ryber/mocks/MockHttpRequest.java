@@ -1,6 +1,7 @@
 package com.github.ryber.mocks;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import spark.route.HttpMethod;
 
@@ -14,7 +15,7 @@ import java.util.*;
 
 
 public class MockHttpRequest implements HttpServletRequest {
-    private final Cookie[] cookies;
+    private final List<Cookie> cookies;
     private final HttpMethod method;
     private final String path;
     private final Multimap<String,String> headers = HashMultimap.create();
@@ -31,7 +32,7 @@ public class MockHttpRequest implements HttpServletRequest {
     }
 
     public MockHttpRequest(HttpMethod method, String path, FormVars form, Cookie[] cookies) {
-        this.cookies = cookies != null ? cookies : new Cookie[]{};
+        this.cookies = cookies != null ? Lists.newArrayList(cookies): new ArrayList<>();
         this.method = method;
         this.path = path;
         setForm(form);
@@ -45,6 +46,10 @@ public class MockHttpRequest implements HttpServletRequest {
         if(input != null){
             this.form = input;
         }
+    }
+
+    public void addCookie(Cookie cookie){
+        cookies.add(cookie);
     }
 
     @Override
@@ -239,7 +244,7 @@ public class MockHttpRequest implements HttpServletRequest {
 
     @Override
     public Cookie[] getCookies() {
-        return cookies;
+        return cookies.stream().toArray(Cookie[]::new);
     }
 
     @Override
